@@ -54,4 +54,4 @@ A later cloud agent clones [atla-o/mattercircle](https://github.com/atla-o/matte
 
 Any UI change that is not pushed yet still needs a clickable live preview URL in the reply and at the top of the PR description. Screenshots alone do not count. Run the Next server from the working tree and publish a tunnel or other ephemeral public URL.
 
-Production host: https://mattercircle.devoutshaman.com on Cloud Run `mattercircle-web` (`devo-holding`, `us-west1`). Push to `main` deploys it (`.github/workflows/deploy-mattercircle-web.yml`). Cloudflare DNS for `devoutshaman.com` stays on the existing Devo zone, DNS-only to `ghs.googlehosted.com`. Do not open a new Cloudflare account.
+Cloud Run service `mattercircle-web` (`devo-holding`, `us-west1`) is live at https://mattercircle-web-384302503084.us-west1.run.app. Intended public host is https://mattercircle.devoutshaman.com in the existing `devoutshaman.com` Cloudflare zone. Push to `main` deploys with the shared Devo Workload Identity pool (`.github/workflows/deploy-mattercircle-web.yml`). That pool does not yet let `atla-o/mattercircle` impersonate `github-cloud-run-deploy`. Do not open a new Cloudflare account.
