@@ -14,4 +14,6 @@ Any UI change that is not yet what he should look at must include a clickable li
 
 Code publishes through GitHub to `main`, then that existing host. No throwaway host. No new pull request unless a real code change needs one. Do not change Cloudflare. Do not add DNS.
 
+When Devo says a UI is good and says push, ship that exact UI to GitHub `main`. Do not restyle it. Do not open a new agent. Do not change DNS. `main` already serves https://mattercircle.devoutshaman.com.
+
 The product spine is the HIGH PURITY climb: Toiletries, Wearables, Utility, Furniture, Structure, Altered, Infrastructure. Anti-petroleum. Do not replace that spine with a Vessel Kit spine. Vessel Kit is only the current Toiletries product.

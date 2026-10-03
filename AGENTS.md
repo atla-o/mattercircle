@@ -11,6 +11,7 @@ Priority order for every task unless Devo says otherwise:
 1. **Complete functional UI** — usable end-to-end. The hub reads the climb functions. No blocking coming-soon for the climb itself.
 2. Black text on **white** backgrounds always. Never follow system dark mode. Never white-on-black.
 3. Publish code through GitHub to `main`. `main` is what serves the existing public host. No throwaway host. No new pull request unless a real code change needs one.
+4. When Devo says a UI is good and says push, ship that exact UI to GitHub `main`. Do not restyle it. Do not open a new agent. Do not change DNS.
 
 Publisher: **atla-o**. Parent: Devo Holdings. Public GitHub: [github.com/atla-o/mattercircle](https://github.com/atla-o/mattercircle).
 
