@@ -39,9 +39,9 @@ export default async function BetaProductPage({ params }: BetaPageProps) {
   const label = slotLabel(category.name, n);
 
   return (
-    <div className="site-wrap flex min-h-0 w-full flex-1 flex-col py-8">
-      <h1 className="text-center font-serif text-4xl tracking-tight">{label}</h1>
-      <p className="mt-1 text-center font-sans text-sm">
+    <div className="site-wrap flex h-full min-h-0 w-full flex-1 flex-col items-center justify-center overflow-hidden py-4">
+      <h1 className="shrink-0 text-center font-serif text-4xl tracking-tight">{label}</h1>
+      <p className="mt-1 shrink-0 text-center font-sans text-sm">
         <Link href={`/climb/${category.slug}`}>{category.name}</Link>
       </p>
       <ProductSlides />

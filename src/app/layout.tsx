@@ -51,7 +51,7 @@ export default function RootLayout({
       className={`${sourceSerif.variable} ${sourceSans.variable} h-full antialiased`}
       style={{ colorScheme: "only light" }}
     >
-      <body className="flex min-h-full flex-col bg-paper font-serif text-ink">
+      <body className="flex h-dvh flex-col overflow-hidden bg-paper font-serif text-ink">
         <a
           href="#content"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-paper focus:px-3 focus:py-2"
@@ -59,7 +59,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <SiteHeader />
-        <main id="content" className="flex flex-1 flex-col">
+        <main id="content" className="flex min-h-0 flex-1 flex-col overflow-y-auto">
           {children}
         </main>
         <SiteFooter />

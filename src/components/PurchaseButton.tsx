@@ -20,7 +20,7 @@ export function PurchaseButton({
         event.preventDefault();
         addCheckout({ slug, n, categoryName });
       }}
-      className="mt-3 inline-block border border-ink px-4 py-2 font-sans text-sm no-underline"
+      className="mt-3 inline-block shrink-0 self-center border border-ink px-4 py-2 font-sans text-sm no-underline"
     >
       purchase
     </a>

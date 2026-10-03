@@ -12,12 +12,12 @@ export function ProductSlides() {
   const [index, setIndex] = useState(0);
 
   return (
-    <div className="mt-6 flex w-full min-h-0 flex-1 flex-col">
+    <div className="mt-4 flex w-full min-h-0 flex-1 flex-col">
       <svg
         viewBox="0 0 160 140"
         role="img"
         aria-label={`image ${index + 1} of 3`}
-        className="h-full min-h-64 w-full flex-1 border border-ink text-ink"
+        className="h-full min-h-0 w-full flex-1 border border-ink text-ink"
       >
         {marks[index]}
       </svg>

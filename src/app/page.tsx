@@ -6,7 +6,7 @@ export default function HomePage() {
   const climb = shownClimb();
 
   return (
-    <div className="site-wrap flex flex-1 flex-col py-8">
+    <div className="site-wrap flex h-full min-h-0 flex-1 flex-col py-8">
       <p className="text-center font-sans text-sm leading-6">
         {climb.map((category, index) => (
           <span key={category.slug}>
