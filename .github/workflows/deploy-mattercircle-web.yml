@@ -3,7 +3,7 @@
 # Org policy blocks allUsers — never pass --allow-unauthenticated.
 # Public access uses invoker IAM disabled (--no-invoker-iam-check).
 #
-# Repository variables: GCP_WORKLOAD_IDENTITY_PROVIDER and GCP_SERVICE_ACCOUNT.
+# Same Workload Identity pool as the other Devo repos.
 name: Deploy mattercircle-web
 
 on:
@@ -24,6 +24,8 @@ env:
   REGION: us-west1
   SERVICE: mattercircle-web
   DOMAIN: mattercircle.devoutshaman.com
+  WIF_PROVIDER: projects/384302503084/locations/global/workloadIdentityPools/github-pool/providers/github-provider
+  WIF_SA: github-cloud-run-deploy@devo-holding.iam.gserviceaccount.com
 
 jobs:
   deploy:
@@ -33,22 +35,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Check Workload Identity config
-        env:
-          WIF_PROVIDER: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
-          WIF_SA: ${{ vars.GCP_SERVICE_ACCOUNT }}
-        run: |
-          if [ -z "$WIF_PROVIDER" ] || [ -z "$WIF_SA" ]; then
-            echo "Set repository variables GCP_WORKLOAD_IDENTITY_PROVIDER and GCP_SERVICE_ACCOUNT."
-            exit 1
-          fi
-
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
           project_id: ${{ env.PROJECT_ID }}
-          workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: ${{ vars.GCP_SERVICE_ACCOUNT }}
+          workload_identity_provider: ${{ env.WIF_PROVIDER }}
+          service_account: ${{ env.WIF_SA }}
 
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@v2
@@ -62,21 +54,22 @@ jobs:
             --no-invoker-iam-check \
             --quiet
 
-      - name: Map custom domain
+      - name: Map mattercircle.devoutshaman.com
         run: |
-          if ! gcloud run domain-mappings describe \
+          gcloud components install beta --quiet
+          if ! gcloud beta run domain-mappings describe \
             --domain="${DOMAIN}" \
-            --project="${PROJECT_ID}" \
-            --region="${REGION}" >/dev/null 2>&1; then
-            gcloud run domain-mappings create \
+            --region="${REGION}" \
+            --project="${PROJECT_ID}" >/dev/null 2>&1; then
+            gcloud beta run domain-mappings create \
               --service="${SERVICE}" \
               --domain="${DOMAIN}" \
-              --project="${PROJECT_ID}" \
               --region="${REGION}" \
+              --project="${PROJECT_ID}" \
               --quiet
           fi
-          gcloud run domain-mappings describe \
+          gcloud beta run domain-mappings describe \
             --domain="${DOMAIN}" \
-            --project="${PROJECT_ID}" \
             --region="${REGION}" \
+            --project="${PROJECT_ID}" \
             --format="yaml(status.resourceRecords)"
