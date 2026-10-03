@@ -4,29 +4,23 @@
 
 Cursor cloud work for this product: one promptable environment, kept current.
 
-You handle code. Devo handles the human UI himself and reiterates it. Do not restyle. He will fix the look.
-
 Priority order for every task unless Devo says otherwise:
 
 1. **Complete functional UI** — usable end-to-end. The hub reads the climb functions. No blocking coming-soon for the climb itself.
 2. Black text on **white** backgrounds always. Never follow system dark mode. Never white-on-black.
-3. Publish code through GitHub to `main`. `main` is what serves the existing public host. No throwaway host. No new pull request unless a real code change needs one.
-4. When Devo says a UI is good and says push, ship that exact UI to GitHub `main`. Do not restyle it. Do not open a new agent. Do not change DNS.
+3. **Do not merge. Do not deploy.** Wait until Devo says merge and deploy.
 
 Publisher: **atla-o**. Parent: Devo Holdings. Public GitHub: [github.com/atla-o/mattercircle](https://github.com/atla-o/mattercircle).
 
 Investor tops: Arcada · Lightround · Humanehealth · Mattercircle.
 
-Public host: [https://mattercircle.devoutshaman.com](https://mattercircle.devoutshaman.com). Cloud Run service `mattercircle-web` in project `devo-holding`, region `us-west1`. DNS is already a CNAME to `ghs.googlehosted.com`. Do not change Cloudflare. Do not add DNS.
-
 ## Live UI preview
 
-Any UI change that is not yet what Devo should look at needs a clickable live preview he can open. Screenshots alone are not enough.
+Every UI change needs a live clickable preview URL, including UI that is not pushed yet. Screenshots are not a substitute.
 
-- Before it is on the public host, give a Cursor preview link.
-- Once the public host is the thing to look at, give [https://mattercircle.devoutshaman.com](https://mattercircle.devoutshaman.com).
+Stand up a running Next server of the working tree and put the exact URL at the top of the PR description. A preview tunnel or other ephemeral public URL is the path. Do not ask for review or merge until that link loads the hub.
 
-No throwaway host.
+No merge and no production deploy until Devo says merge and deploy. No auto-merge.
 
 ## This product
 
@@ -58,6 +52,6 @@ A later cloud agent clones [atla-o/mattercircle](https://github.com/atla-o/matte
 - Boot config for a fresh agent: `.cursor/environment.json` (`npm ci`, then that dev server)
 - The preview rule also lives in `.cursor/rules/live-ui-preview.mdc` and applies on every turn
 
-Any UI change that is not yet what Devo should look at still needs a clickable live preview in the reply: a Cursor preview link before it is on the public host, and [https://mattercircle.devoutshaman.com](https://mattercircle.devoutshaman.com) once that is the page to look at. Screenshots alone do not count. No throwaway host.
+Any UI change that is not pushed yet still needs a clickable live preview URL in the reply and at the top of the PR description. Screenshots alone do not count. Run the Next server from the working tree and publish a tunnel or other ephemeral public URL.
 
-Code on `main` is what the public host serves. Do not change Cloudflare. Do not add DNS. Do not open a new Cloudflare account.
+Cloud Run service `mattercircle-web` (`devo-holding`, `us-west1`) is live at https://mattercircle-web-384302503084.us-west1.run.app. Intended public host is https://mattercircle.devoutshaman.com in the existing `devoutshaman.com` Cloudflare zone. Push to `main` deploys with the shared Devo Workload Identity pool (`.github/workflows/deploy-mattercircle-web.yml`). That pool does not yet let `atla-o/mattercircle` impersonate `github-cloud-run-deploy`. Do not open a new Cloudflare account.
