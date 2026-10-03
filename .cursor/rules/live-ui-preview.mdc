@@ -1,0 +1,15 @@
+---
+description: Unpushed UI changes need a clickable live preview URL
+alwaysApply: true
+---
+
+# Live UI preview
+
+Any UI change, including UI that is not pushed yet, must include a clickable live preview URL. Screenshots alone are not enough.
+
+- Run the Next server from the working tree: `npm run dev -- --hostname 0.0.0.0 --port 3000`.
+- Put the exact URL in the reply and at the top of the PR description.
+- A preview tunnel or other ephemeral public URL is enough. A static mock is last resort.
+- Do not merge. Do not deploy unless Devo says merge and deploy.
+
+The product spine is the HIGH PURITY climb: Toiletries, Wearables, Utility, Furniture, Structure, Altered, Infrastructure. Anti-petroleum. Do not replace that spine with a single product.
