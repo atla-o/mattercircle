@@ -32,6 +32,9 @@ yarn-error.log*
 .env*
 !.env.example
 
+# order records
+/data
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getCategory, listClimb, neighbors } from "@/lib/climb";
+import { getCategory } from "@/lib/climb";
+import { shownClimb } from "@/lib/shown";
+import { slotLabel } from "@/lib/slot";
 
 type ClimbPageProps = {
   params: Promise<{ slug: string }>;
 };
 
 export function generateStaticParams() {
-  return listClimb().map((category) => ({ slug: category.slug }));
+  return shownClimb().map((category) => ({ slug: category.slug }));
 }
 
 export async function generateMetadata({
@@ -27,49 +29,36 @@ export async function generateMetadata({
 
 export default async function ClimbPage({ params }: ClimbPageProps) {
   const { slug } = await params;
-  const category = getCategory(slug);
+  const climb = shownClimb();
+  const category = climb.find((item) => item.slug === slug);
   if (!category) {
     notFound();
   }
-  const { previous, next } = neighbors(slug);
+  const index = climb.findIndex((item) => item.slug === slug);
+  const previous = index > 0 ? climb[index - 1] : undefined;
+  const next = index >= 0 && index < climb.length - 1 ? climb[index + 1] : undefined;
 
   return (
     <div className="site-wrap flex flex-1 flex-col py-8 sm:py-12">
-      <p className="kicker">
-        <Link href="/">Climb</Link>
-        <span className="mx-2" aria-hidden="true">
-          ·
-        </span>
-        {String(category.order).padStart(2, "0")}
+      <h1 className="text-center font-serif text-4xl tracking-tight">
+        {category.name}
+      </h1>
+      <p className="mt-2 text-center font-sans text-[0.625rem] leading-4">
+        products
       </p>
-      <h1 className="mt-3 font-serif text-4xl tracking-tight">{category.name}</h1>
-      <p className="mt-4 max-w-prose text-lg">{category.summary}</p>
 
-      <section className="mt-8">
-        <h2 className="kicker">Products</h2>
-        {category.products.length === 0 ? (
-          <p className="mt-3 border border-ink px-4 py-6">
-            No product locked in this category yet.
-          </p>
-        ) : (
-          <ul className="mt-3 border border-ink">
-            {category.products.map((product) => (
-              <li
-                key={product.slug}
-                className="border-b border-ink last:border-b-0"
-              >
-                <Link
-                  href={`/products/${product.slug}`}
-                  className="flex items-baseline justify-between gap-4 px-4 py-3 no-underline hover:bg-ink hover:text-paper"
-                >
-                  <span>{product.name}</span>
-                  <span className="font-sans text-xs">{product.status}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
+      <ul className="mt-8 border border-ink">
+        {[1, 2, 3, 4, 5].map((slot) => (
+          <li key={slot} className="border-b border-ink last:border-b-0">
+            <Link
+              href={`/climb/${category.slug}/beta/${slot}`}
+              className="block px-4 py-3 no-underline hover:bg-ink hover:text-paper"
+            >
+              {slotLabel(category.name, slot)}
+            </Link>
+          </li>
+        ))}
+      </ul>
 
       <nav className="mt-8 flex justify-between gap-4 font-sans text-sm">
         {previous ? (
