@@ -32,7 +32,7 @@ Toiletries → Wearables → Utility → Furniture → Structure → Altered →
 
 Category names stay plain. Do not rename them. Do not invent trade names for the rungs. Products inside a category can flex later.
 
-Vessel Kit is the first lock, under Toiletries. The factory end-state is physical products. Infrastructure is the house and item decomposer.
+The spine is that climb. Do not replace it with a single product. Vessel Kit is only the current Toiletries product, not the spine. Products inside a rung can flex. The factory end-state is physical products. Infrastructure is the house and item decomposer.
 
 Catalog functions live in `src/lib/climb.ts`. HTTP reads are `GET /api/climb`, `GET /api/climb/[slug]`, and `GET /api/products/[slug]`. Pages call the same functions.
 
@@ -41,3 +41,17 @@ Catalog functions live in `src/lib/climb.ts`. HTTP reads are `GET /api/climb`, `
 Next.js App Router, TypeScript, Tailwind v4. Dev server: `npm run dev`.
 
 Read Next.js notes in `node_modules/next/dist/docs/` before inventing APIs from older training data. `next.config.ts` sets `agentRules: false` so `next dev` does not rewrite this file.
+
+## Cursor Cloud specific instructions
+
+A later cloud agent clones [atla-o/mattercircle](https://github.com/atla-o/mattercircle) and starts from this file. Do not invent another product or another workflow.
+
+- Install: `npm ci`
+- Dev server: `npm run dev -- --hostname 0.0.0.0 --port 3000` → http://127.0.0.1:3000
+- Checks: `npm test`, then `npm run typecheck`, then `npm run lint`
+- Boot config for a fresh agent: `.cursor/environment.json` (`npm ci`, then that dev server)
+- The preview rule also lives in `.cursor/rules/live-ui-preview.mdc` and applies on every turn
+
+Any UI change that is not pushed yet still needs a clickable live preview URL in the reply and at the top of the PR description. Screenshots alone do not count. Run the Next server from the working tree and publish a tunnel or other ephemeral public URL.
+
+Do not merge. Do not deploy. There is no production host yet.
