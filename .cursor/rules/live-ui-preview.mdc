@@ -1,15 +1,17 @@
 ---
-description: Unpushed UI changes need a clickable live preview URL
+description: UI changes need a clickable live preview Devo can open
 alwaysApply: true
 ---
 
 # Live UI preview
 
-Any UI change, including UI that is not pushed yet, must include a clickable live preview URL. Screenshots alone are not enough.
+You handle code. Devo handles the human UI himself and reiterates it. Do not restyle. He will fix the look.
 
-- Run the Next server from the working tree: `npm run dev -- --hostname 0.0.0.0 --port 3000`.
-- Put the exact URL in the reply and at the top of the PR description.
-- A preview tunnel or other ephemeral public URL is enough. A static mock is last resort.
-- Do not merge. Do not deploy unless Devo says merge and deploy.
+Any UI change that is not yet what he should look at must include a clickable live preview he can open. Screenshots alone are not enough.
 
-The product spine is the HIGH PURITY climb: Toiletries, Wearables, Utility, Furniture, Structure, Altered, Infrastructure. Anti-petroleum. Do not replace that spine with a single product.
+- Before it is on the public host, give a Cursor preview link.
+- Once the public host is the thing to look at, give https://mattercircle.devoutshaman.com.
+
+Code publishes through GitHub to `main`, then that existing host. No throwaway host. No new pull request unless a real code change needs one. Do not change Cloudflare. Do not add DNS.
+
+The product spine is the HIGH PURITY climb: Toiletries, Wearables, Utility, Furniture, Structure, Altered, Infrastructure. Anti-petroleum. Do not replace that spine with a Vessel Kit spine. Vessel Kit is only the current Toiletries product.
